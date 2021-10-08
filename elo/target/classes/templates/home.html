@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">	</head>
+	<body>
+		<div class="container">
+			<div class="card" th:each="pedido : ${pedidos}">
+				<h2>Dados do Usuário:</h2>
+				<div  class="card-header" th:text="${pedido.nome}">Nome do Produto</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">
+							<div class="row ">
+								<div class="col-md-5">Email: <span th:text="${pedido.usuario}"></span></div>
+							</div>
+							
+							<div>Produto</div> 
+							<div> <input class="form-control" th:value="${pedido.disciplina}" value="url do produto"></div>
+							<div>
+							 <div>Cidade: <span th:text="${pedido.cidade}"></span></div>
+							</div>
+							</div>
+							<div class="col-12 col-sm-4">
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</body>
+</html>
