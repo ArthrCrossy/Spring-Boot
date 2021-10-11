@@ -1,0 +1,47 @@
+<html>
+	<head th:replace="~{base :: headed}"></head>
+	<head th:replace="~{base :: headed}"></head>
+	 <div th:replace="~{base :: log}"></div>
+	
+	<body>
+		<div class="container">
+			<div class="jumbotron mb-0">
+				<h1 class="display-4">Novo Pedido</h1>
+			</div>
+			<div class="card mt-3">
+				<form  th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST">
+					<div>
+						<label for="nome">Nome</label>
+						<input th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="nome"/>
+						<small>Informa qual o seu nome</small>
+						<div class="invalid-feedback" th:errors="*{nome}">
+							Por Favor, Digite o nome
+						</div>
+					</div>
+					<div>
+						<label for="usuario">Usuario</label>
+						<input  th:field="*{usuario}" th:errorclass="is-invalid" class="form-control" placeholder="usuario"/>
+						<small>Digite o seu nome de usuário</small>
+						<div class="invalid-feedback" th:errors="*{usuario}">
+						Por Favor, Digite o nome do usuario
+						</div>
+					</div>
+					<div>
+						<label for="disciplina">disciplina</label>
+						<input  th:field="*{disciplina}" th:errorclass="is-invalid" class="form-control" placeholder="disciplina"/>
+						<small>Por Favor, Digite aqui a sua Disciplina</small>
+						<div class="invalid-feedback" th:errors="*{disciplina}">
+							Por Favor, Digite a sua disciplina
+						</div>
+					</div>
+					<div>
+						<label for="email">email</label>
+						<input  th:field="*{email}" class="form-control" placeholder="url do produto"/>
+						<small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
+					</div>
+					<button class="btn btn-primary" type="submit">Cadastrar</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
