@@ -16,6 +16,7 @@ public class RequisicaoNovoPedido {
 	private String usuario;
 	@NotBlank
 	private String disciplina;
+	
 	private String email;
 	
 		
@@ -53,7 +54,6 @@ public class RequisicaoNovoPedido {
 		pedido.setNome(nome);
 		pedido.setUsuario(usuario);
 		pedido.setDisciplina(disciplina);
-		pedido.setEmail(email);
 		pedido.setStatus(StatusPedido.AGUARDANDO);
 		
 		return pedido;

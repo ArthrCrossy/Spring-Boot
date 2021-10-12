@@ -19,6 +19,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import java.security.Principal;
 import java.util.Arrays;
 //import br.com.professores.elo.model.Pedido;
 
@@ -31,8 +32,9 @@ public class homeController {
 	private PedidoRepository repository;
 	
 	@GetMapping
-	public String home(Model model) {		
-	List<Pedido> pedidos = repository.findAll();
+	public String home(Model model, Principal principal) {		
+	//List<Pedido> pedidos = repository.findAll();
+		List<Pedido> pedidos = repository.findAllByUsuario(principal.getName());
 	model.addAttribute("pedidos", pedidos);
 		
 		return "home";

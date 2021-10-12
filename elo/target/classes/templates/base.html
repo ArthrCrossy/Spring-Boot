@@ -16,8 +16,13 @@
 </head>
 
 <div th:fragment="log" class="logo-container mb-3 p-3 d-flex justify-content-between">
-	<span class="Logo">Professores.com</span>
-	<span class="Logo">Login</span>
+<a  href="/home"><span class="Logo">Professores.com</span></a>
+<div>
+<a href="/login"><span sec:authorize="!isAuthenticated()" class="Logo">Login</span> </a>
+<a onclick="document.querySelector('#form-login').submit()" href=#><span sec:authorize="isAuthenticated()" class="Logo">logout</span> </a>
+<form id="form-login" th:action="@{/logout}" method="post"></form>
+
+</div>
 </div>
 
 

@@ -3,13 +3,18 @@ package br.com.professores.elo.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Pedido {
@@ -29,6 +34,10 @@ public class Pedido {
 	
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
+	
 	
 	
 	public StatusPedido getStatus() {
@@ -55,6 +64,12 @@ public class Pedido {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getSenha() {
 		return Senha;

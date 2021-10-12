@@ -8,6 +8,31 @@ public class EloApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EloApplication.class, args);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
