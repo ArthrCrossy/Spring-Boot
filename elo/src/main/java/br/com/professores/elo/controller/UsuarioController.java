@@ -1,8 +1,8 @@
 package br.com.professores.elo.controller;
+import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,36 +14,32 @@ import br.com.professores.elo.model.Pedido;
 import br.com.professores.elo.model.StatusPedido;
 import br.com.professores.elo.repository.PedidoRepository;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
-import java.security.Principal;
-import java.util.Arrays;
-//import br.com.professores.elo.model.Pedido;
-
-
 @Controller
-@RequestMapping("home")
-public class homeController {
+@RequestMapping("usuario")
+public class UsuarioController {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
-	@GetMapping
+	@GetMapping("pedido")
 	public String home(Model model, Principal principal) {		
-	
-	Sort sort = Sort.by("id").descending();
-	PageRequest paginacao = PageRequest.of(0, 5, sort);
-		
-	List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE, paginacao);
+		List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
 	model.addAttribute("pedidos", pedidos);
 		
-		return "home";
+		return "usuario/home";
 	}
 	
+	@GetMapping("pedido/{status}")
+	public String porStatus(@PathVariable("status") String status, Model model, Principal principal) {
+		List<Pedido> pedidos = pedidoRepository.findByStatusEUsuario(StatusPedido.valueOf(status.toUpperCase()), principal.getName());
+		model.addAttribute("pedidos", pedidos);
+		model.addAttribute("status", status);
+		return "usuario/home"; 
+	}
 	
+	@ExceptionHandler(IllegalArgumentException.class)
+	public String onError() {
+		return "redirect:/usuario/home";
+	}
+
 }

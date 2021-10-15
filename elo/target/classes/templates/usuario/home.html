@@ -1,0 +1,50 @@
+<html>
+		<head th:replace="~{base :: headed}"></head>
+		<div th:replace="~{base :: log}"></div>
+	<body>
+	
+	<div class="container">
+		<div class="jumbotron mb-2 mt-2">
+			<h1 class="display-4">Meus Pedidos</h1>
+		</div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light bg-light d-flex justify-content-between mb-3">
+        <div th:classappend="${status} == null ? 'active'" class="navbar-nav">
+        	<a class="nav-item nav-link active" th:href="@{/usuario/pedido}">Todos</a>
+            <a th:classappend="${status} == 'AGUARDANDO' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/aguardando}">Aguardando</a>
+            <a th:classappend="${status} == 'APROVADO' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/aprovado}">Aprovado</a>
+            <a th:classappend="${status} == 'ENTREGUE' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/entregue}">Rejeitado</a>
+        </div>
+           <a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>  
+        </nav> 
+    </div>
+		<div class="container mb-2">
+			<div class="card mb-3" th:each="pedido : ${pedidos}">
+				<h2>Dados do Usuário:</h2>
+				<th:block th:switch="${pedido.status.name()}">
+				<div th:case="'AGUARDANDO'" class="card-header alert-warning" th:text="${pedido.nome}"></div>
+				<div th:case="'APROVADO'" class="card-header alert-success" th:text="${pedido.nome}"></div>
+				<div th:case="'ENTREGUE'" class="card-header alert-dark" th:text="${pedido.nome}"></div>
+				</th:block>
+				<div class="card-body mb-3">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">
+							<div class="row ">
+								<div class="col-md-5">Email: <span th:text="${pedido.usuario}"></span></div>
+							</div>
+							
+							<div>Produto</div> 
+							<div> <input class="form-control" th:value="${pedido.disciplina}" value="url do produto"></div>
+							<div>
+							 <div>CITY: <span th:text="${pedido.cidade}"></span></div>
+							</div>
+							</div>
+							<div class="col-12 col-sm-4">
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
